@@ -1,0 +1,17 @@
+html, body, header, h1, h2, h3, ul, li, div, main, figure, img, p, aside, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+li {
+    list-style-type: none;
+}
+
+:root {
+    --light-purple: #37268C;
+    --dark-purple: #2E245E;
+    --black: #292929;
+    --grey: #F5F5F5;
+}
