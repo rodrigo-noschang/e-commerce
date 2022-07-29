@@ -32,13 +32,14 @@ header {
 
 .shop-list-container {
     max-width: 1000px;
-
-}
-
-.shop-list-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.nothing-found-container {
+    padding: 10px;
+    max-width: 1000px;
 }
 
 .shop-item-container {
@@ -46,6 +47,20 @@ header {
     max-width: 300px;
     margin: 0px 10px 20px;
     border: 2px solid var(--grey);
+}
+
+.not-found-text {
+    margin: 15px 0;
+}
+
+.back-to-shop {
+    color: var(--dark-purple);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.back-to-shop:hover {
+    text-decoration: underline 2px;
 }
 
 .shop-item-figure {
@@ -112,6 +127,7 @@ header {
     border: none;
     background-color: var(--light-purple);
     color: #FFF;
+    cursor: pointer;
 }
 
 .kart-title {

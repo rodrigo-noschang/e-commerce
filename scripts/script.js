@@ -1,12 +1,18 @@
+const pageTitle      = document.querySelector('.header-title');
 const productList    = document.querySelector('.shop-list-container');
+const emptyShop      = document.querySelector('.nothing-found-container');
+const rebuildShop    = document.querySelector('.back-to-shop');
+const searchButton   = document.querySelector('.search-trigger');
+const searchInput    = document.querySelector('.search-input');
+const cartEmpty      = document.querySelector('.empty-kart-container');
 const cartList       = document.querySelector('.kart-list-container');
 const cartListFooter = document.querySelector('.kart-footer-container');
-const cartEmpty      = document.querySelector('.empty-kart-container');
 
+// Cria os itens da vritrine 
+function createProducts(products) {
+    productList.innerHTML = '';
 
-function createProducts() {
-
-    products.forEach((product, index) => {
+    products.forEach(product => {
         const productContainer = document.createElement('li');
         productContainer.classList.add('shop-item-container');
         productList.appendChild(productContainer);
@@ -47,13 +53,14 @@ function createProducts() {
         const buy = document.createElement('button');
         buy.classList.add('shop-item-buy');
         buy.innerText = 'Adicionar ao Carrinho';
-        buy.id = `product-${index}`;
+        buy.id = `product-${product.id}`;
         infoContainer.appendChild(buy);
 
         buy.addEventListener('click', addToKart)
     })
 }
 
+// Cria os itens no carrinho
 function createCartsItem() {
     if (cart.length === 0) {
         cartEmpty.classList.remove('hidden');
@@ -107,6 +114,7 @@ function createCartsItem() {
     updateFooterValues();
 }
 
+// Atualiza os valores do footer do carrinho
 function updateFooterValues() {
     const amountSlot = document.getElementById('kart-quantity');
     const priceSlot = document.getElementById('kart-total');
@@ -118,18 +126,56 @@ function updateFooterValues() {
     priceSlot.innerText = `R$ ${itemsTotal.toFixed(2)}`;
 }
 
+// Adiciona item no carrinho
 function addToKart(evt) {
-    const productIndex = evt.target.id.split('-')[1];
-    cart.push(products[productIndex]);
+    const productId = evt.target.id.split('-')[1];
+    const selectedProduct = products.filter(product => product.id == productId);
+    cart.push(selectedProduct[0]);
+    
     createCartsItem();
+
 }
 
+// Remove item do carrinho
 function removeFromKart(evt) {
     const cartIndex = evt.target.id.split('-')[1];
     cart.splice(cartIndex, 1);
     createCartsItem();
 }
 
-
-createProducts();
+// Chama as funções que fazem as criações iniciais (vitrine e carrinho vazio) 
+createProducts(products);
 createCartsItem();
+
+// Filtra os itens da vritrine baseado no que o usuário digitar no input
+function filterItems() {
+    const inputValue = searchInput.value.trim().toLowerCase();
+    
+    const filteredProducts = products.filter( product => {
+        return (
+            product.name.toLowerCase().includes(inputValue) || 
+            product.description.toLowerCase().includes(inputValue) || 
+            product.category.toLowerCase().includes(inputValue)
+        )
+    })
+
+    createProducts(filteredProducts);
+
+    if (filteredProducts.length === 0) {
+        emptyShop.classList.remove('hidden');
+    } else {
+        emptyShop.classList.add('hidden');
+    }
+    
+    
+}
+
+searchButton.addEventListener('click', filterItems)
+
+
+// Quando a pesquisa não retorna nada, o "clicar aqui" do texto vai 
+// reconstruir a vitrine no formato original.
+rebuildShop.addEventListener('click', () => {
+    searchInput.value = '';
+    filterItems();
+});
