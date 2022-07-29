@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/reset.css">
     <link rel="stylesheet" href="./style/style.css">
+    <script src = './scripts/database.js' defer> </script>
+    <script src = './scripts/script.js'   defer> </script>
     <title>Document</title>
 </head>
 
@@ -24,101 +26,6 @@
 
     <main class='shop-container'>
         <ul class='shop-list-container'>
-            <li class='shop-item-container'>
-                <figure class='shop-item-figure'>
-                    <img src="./src/img/black-hat.png" alt="Shop Item">
-                </figure>
-
-                <div class='item-info-container'>
-                    <p class='shop-item-category'> Camisetas </p>
-                    <h3 class='shop-item-name'> Black Hat </h3>
-                    <p class='shop-item-description'>
-                        Adicione um pouco de energia ao seu guarda roupa com essa vibrante peça de roupa.
-                    </p>
-                    <p class='shop-item-price'> R$ 100,00 </p>
-                    <button class='shop-item-buy'> Adicionar ao Carrinho </button>
-                </div>
-            </li>
-
-            <li class='shop-item-container'>
-                <figure class='shop-item-figure'>
-                    <img src="./src/img/black-hat.png" alt="Shop Item">
-                </figure>
-
-                <div class='item-info-container'>
-                    <p class='shop-item-category'> Camisetas </p>
-                    <h3 class='shop-item-name'> Black Hat </h3>
-                    <p class='shop-item-description'>
-                        Adicione um pouco de energia ao seu guarda roupa com essa vibrante peça de roupa.
-                    </p>
-                    <p class='shop-item-price'> R$ 100,00 </p>
-                    <button class='shop-item-buy'> Adicionar ao Carrinho </button>
-                </div>
-            </li>
-
-            <li class='shop-item-container'>
-                <figure class='shop-item-figure'>
-                    <img src="./src/img/black-hat.png" alt="Shop Item">
-                </figure>
-
-                <div class='item-info-container'>
-                    <p class='shop-item-category'> Camisetas </p>
-                    <h3 class='shop-item-name'> Black Hat </h3>
-                    <p class='shop-item-description'>
-                        Adicione um pouco de energia ao seu guarda roupa com essa vibrante peça de roupa.
-                    </p>
-                    <p class='shop-item-price'> R$ 100,00 </p>
-                    <button class='shop-item-buy'> Adicionar ao Carrinho </button>
-                </div>
-            </li>
-
-            <li class='shop-item-container'>
-                <figure class='shop-item-figure'>
-                    <img src="./src/img/black-hat.png" alt="Shop Item">
-                </figure>
-
-                <div class='item-info-container'>
-                    <p class='shop-item-category'> Camisetas </p>
-                    <h3 class='shop-item-name'> Black Hat </h3>
-                    <p class='shop-item-description'>
-                        Adicione um pouco de energia ao seu guarda roupa com essa vibrante peça de roupa.
-                    </p>
-                    <p class='shop-item-price'> R$ 100,00 </p>
-                    <button class='shop-item-buy'> Adicionar ao Carrinho </button>
-                </div>
-            </li>
-
-            <li class='shop-item-container'>
-                <figure class='shop-item-figure'>
-                    <img src="./src/img/black-hat.png" alt="Shop Item">
-                </figure>
-
-                <div class='item-info-container'>
-                    <p class='shop-item-category'> Camisetas </p>
-                    <h3 class='shop-item-name'> Black Hat </h3>
-                    <p class='shop-item-description'>
-                        Adicione um pouco de energia ao seu guarda roupa com essa vibrante peça de roupa.
-                    </p>
-                    <p class='shop-item-price'> R$ 100,00 </p>
-                    <button class='shop-item-buy'> Adicionar ao Carrinho </button>
-                </div>
-            </li>
-
-            <li class='shop-item-container'>
-                <figure class='shop-item-figure'>
-                    <img src="./src/img/black-hat.png" alt="Shop Item">
-                </figure>
-
-                <div class='item-info-container'>
-                    <p class='shop-item-category'> Acessórios </p>
-                    <h3 class='shop-item-name'> Black Hat </h3>
-                    <p class='shop-item-description'>
-                        Adicione um pouco de energia ao seu guarda roupa com essa vibrante peça de roupa.
-                    </p>
-                    <p class='shop-item-price'> R$ 100,00 </p>
-                    <button class='shop-item-buy'> Adicionar ao Carrinho </button>
-                </div>
-            </li>
         </ul>
 
 
@@ -128,48 +35,14 @@
                 <button class='search-trigger'> Pesquisar </button>
             </div>
 
+            <!-- Carrinho Full -->
             <div class='kart-container'>
                 <h2 class='kart-title'> Carrinho de Compras </h2>
-                <ul class='kart-list-container'>
-                    <li class='kart-list-item'>
-                        <figure class='kart-list-figure'>
-                            <img class = 'kart-list-image' src="./src/img/black-hat.png" alt="cart item">
-                        </figure>
-
-                        <div class='kart-item-info-container'>
-                            <h3 class='kart-item-name'> Lightweight Jacket </h3>
-                            <p class='kart-item-price'> R$ 100,00 </p>
-                            <button class='kart-item-remove'> Remover produto </button>
-                        </div>
-                    </li>
-
-                    <li class='kart-list-item'>
-                        <figure class='kart-list-figure'>
-                            <img class = 'kart-list-image' src="./src/img/black-hat.png" alt="cart item">
-                        </figure>
-
-                        <div class='kart-item-info-container'>
-                            <h3 class='kart-item-name'> Lightweight Jacket </h3>
-                            <p class='kart-item-price'> R$ 100,00 </p>
-                            <button class='kart-item-remove'> Remover produto </button>
-                        </div>
-                    </li>
-
-                    <li class='kart-list-item'>
-                        <figure class='kart-list-figure'>
-                            <img class = 'kart-list-image' src="./src/img/black-hat.png" alt="cart item">
-                        </figure>
-
-                        <div class='kart-item-info-container'>
-                            <h3 class='kart-item-name'> Lightweight Jacket </h3>
-                            <p class='kart-item-price'> R$ 100,00 </p>
-                            <button class='kart-item-remove'> Remover produto </button>
-                        </div>
-                    </li>
+                <ul class='kart-list-container hidden'>
                 </ul>
             </div>
 
-            <div class = 'kart-footer-container'>
+            <div class = 'kart-footer-container hidden'>
                 <p class = 'kart-quantity-container'>
                     <span> Quantidade: </span>
                     <span id = 'kart-quantity'> 3 </span>
@@ -178,6 +51,12 @@
                     <span> Total: </span>
                     <span id = 'kart-total'> R$ 300 </span>
                 </p>
+            </div>
+
+            <!-- Carrinho vazio -->
+            <div class = 'empty-kart-container'>
+                <h2 class = 'empty-kart-title'> Carrinho vazio </h2>
+                <p class = 'empty-kart-text'> Adicione itens </p>
             </div>
         </aside>
     </main>
