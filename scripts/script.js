@@ -1,4 +1,5 @@
 const pageTitle      = document.querySelector('.header-title');
+const categories     = document.getElementsByClassName('category');
 const productList    = document.querySelector('.shop-list-container');
 const emptyShop      = document.querySelector('.nothing-found-container');
 const rebuildShop    = document.querySelector('.back-to-shop');
@@ -72,7 +73,7 @@ function createCartsItem() {
         cartListFooter.classList.remove('hidden');
     }
 
-    cartList.innerHTML = '';
+    cartList.innerHTML = ''; 
 
     cart.forEach((item, index) => {
         const itemContainer = document.createElement('li');
@@ -97,18 +98,42 @@ function createCartsItem() {
         itemName.innerText = item.name;
         infoContainer.appendChild(itemName);
 
+        const amountContanier = document.createElement('div');
+        amountContanier.classList.add('kart-item-amount-container');
+        infoContainer.appendChild(amountContanier);
+
+        const subButton = document.createElement('span');
+        subButton.classList.add('kart-item-sub');
+        subButton.innerText = '-';
+        subButton.id = `remove-${item.id}`
+        subButton.addEventListener('click', takeOneUnityAway);
+        amountContanier.appendChild(subButton);
+        
+        const itemAmount = document.createElement('span');
+        itemAmount.classList.add('kart-item-amount');
+        itemAmount.innerText = item.amount;
+        amountContanier.appendChild(itemAmount);
+
+        const addButton = document.createElement('span');
+        addButton.classList.add('kart-item-add');
+        addButton.innerText = '+';
+        addButton.id = `add-${item.id}`;
+        addButton.addEventListener('click', addToKart);
+        amountContanier.appendChild(addButton);
+
         const itemPrice = document.createElement('p');
         itemPrice.classList.add('kart-item-price');
-        itemPrice.innerText = `R$ ${item.price.toFixed(2)}`;
+        const price = item.price * item.amount;
+        itemPrice.innerText = `R$ ${price.toFixed(2)}`;
         infoContainer.appendChild(itemPrice);
 
-        const itemRemove = document.createElement('button');
-        itemRemove.classList.add('kart-item-remove');
-        itemRemove.innerText = 'Remover produto';
-        itemRemove.id = `cart-${index}`;
-        infoContainer.appendChild(itemRemove);
+        const removeItem = document.createElement('div');
+        removeItem.classList.add('kart-item-remove');
+        removeItem.id = `delete-${item.id}`;
+        removeItem.innerText = 'X';
+        itemContainer.appendChild(removeItem);
 
-        itemRemove.addEventListener('click', removeFromKart);
+        removeItem.addEventListener('click', removeFromKart);
     })
 
     updateFooterValues();
@@ -119,8 +144,9 @@ function updateFooterValues() {
     const amountSlot = document.getElementById('kart-quantity');
     const priceSlot = document.getElementById('kart-total');
 
-    const itemsAmount = cart.length;
-    const itemsTotal = cart.reduce((acc, curr) => acc + curr.price, 0);
+    const itemsAmount = cart.reduce ((acc, curr) => acc + curr.amount, 0);
+
+    const itemsTotal = cart.reduce ((acc, curr) => acc + curr.price * curr.amount, 0)
 
     amountSlot.innerText = itemsAmount;
     priceSlot.innerText = `R$ ${itemsTotal.toFixed(2)}`;
@@ -129,23 +155,53 @@ function updateFooterValues() {
 // Adiciona item no carrinho
 function addToKart(evt) {
     const productId = evt.target.id.split('-')[1];
-    const selectedProduct = products.filter(product => product.id == productId);
-    cart.push(selectedProduct[0]);
-    
-    createCartsItem();
+    const productAlreadyInCart = cart.find(product => product.id == productId);
 
+    if (!productAlreadyInCart) {
+        const selectedProduct = products.find(product => product.id == productId);
+        selectedProduct.amount = 1;
+        cart.push(selectedProduct);
+    } else {
+        productAlreadyInCart.amount++;
+    }
+
+    createCartsItem();
 }
 
 // Remove item do carrinho
 function removeFromKart(evt) {
-    const cartIndex = evt.target.id.split('-')[1];
-    cart.splice(cartIndex, 1);
+    const itemId = evt.target.id.split('-')[1];
+    const itemIndex = cart.findIndex(item => item.id == itemId);
+    cart.splice(itemIndex, 1);
     createCartsItem();
+}
+
+function takeOneUnityAway (evt) {
+    const itemId = evt.target.id.split('-')[1];
+    const itemInCart = cart.find(item => item.id == itemId);
+
+    if (itemInCart.amount === 1) return;
+    itemInCart.amount--;
+    createCartsItem();
+
 }
 
 // Chama as funções que fazem as criações iniciais (vitrine e carrinho vazio) 
 createProducts(products);
 createCartsItem();
+
+
+// Caso a busca pelo input ou categoria não encontre nenhum produto,
+// essa função colocará a mensagem de "nada foi encontrado, ..."
+function showHideMessageForEmptyShop(shopList) {
+    if (shopList.length === 0) {
+        emptyShop.classList.remove('hidden');
+    } else {
+        emptyShop.classList.add('hidden');
+    }
+}
+
+
 
 // Filtra os itens da vritrine baseado no que o usuário digitar no input
 function filterItems() {
@@ -160,14 +216,7 @@ function filterItems() {
     })
 
     createProducts(filteredProducts);
-
-    if (filteredProducts.length === 0) {
-        emptyShop.classList.remove('hidden');
-    } else {
-        emptyShop.classList.add('hidden');
-    }
-    
-    
+    showHideMessageForEmptyShop(filteredProducts);
 }
 
 searchButton.addEventListener('click', filterItems)
@@ -179,3 +228,40 @@ rebuildShop.addEventListener('click', () => {
     searchInput.value = '';
     filterItems();
 });
+
+
+// Filtra os itens da loja através das categorias no Header da página.
+function filterByCategory(evt) {
+    const selectedCategory = evt.target.innerText.toLowerCase();
+    let selectedItems = [];
+
+    if (selectedCategory === 'todos') {
+        selectedItems = products;
+    } else {
+        selectedItems = products.filter(product => product.category.toLowerCase() === selectedCategory);
+    }
+
+    createProducts(selectedItems);
+    showHideMessageForEmptyShop(selectedItems);
+    highlighSelectedCategory(evt.target);
+}
+
+function highlighSelectedCategory(selectedCategory) {
+    for (let i = 0; i < categories.length; i++) {
+        categories[i].classList.remove('selected-category');
+    }
+
+    selectedCategory.classList.add('selected-category');
+}
+
+
+// Adiciona o eventListener nos itens do header.
+function eventListenerOnHeaderCategories () {
+    for (let i = 0; i < categories.length; i++) {
+        categories[i].addEventListener('click', filterByCategory)
+    }
+}
+
+eventListenerOnHeaderCategories ();
+
+

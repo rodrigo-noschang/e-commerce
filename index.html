@@ -17,10 +17,10 @@
         <h1 class='header-title'> Weartake </h1>
 
         <ul class='categories-container'>
-            <li class='category selected-category'> Todos </li>
-            <li class='category'> Acessórios </li>
-            <li class='category'> Calçados </li>
-            <li class='category'> Camisetas </li>
+            <li class='category category-all selected-category'> Todos </li>
+            <li class='category category-accessory'> Acessorios </li>
+            <li class='category category-shoes'> Calcados </li>
+            <li class='category category-shirts'> Camisetas </li>
         </ul>
     </header>
 
@@ -29,9 +29,11 @@
         </ul>
 
         <div class = 'nothing-found-container hidden'>
-            <h3 class = 'not-found-title'> Não encontramos nada compatível com sua pesquisa! </h3>
+            <h3 class = 'not-found-title'> 
+                Não encontramos nada compatível com sua pesquisa! 
+            </h3>
             <p class = 'not-found-text'> 
-                Reveja a se sua pesquisa não contem nenhum erro de digitação, 
+                Reveja se sua pesquisa não contem nenhum erro de digitação, 
                 e tente novamente! 
             </p>
             <p class = 'not-found-return'>
@@ -41,7 +43,6 @@
             
 
         </div>
-
 
         <aside class='kart-container'>
             <div class='search-container'>
@@ -53,6 +54,22 @@
             <div class='kart-container'>
                 <h2 class='kart-title'> Carrinho de Compras </h2>
                 <ul class='kart-list-container hidden'>
+                    <li class="kart-list-item">
+                        <figure class="kart-list-figure">
+                            <img class="kart-list-image" src="./src/img/male-white-shirt.png">
+                        </figure>
+                        <div class="kart-item-info-container">     
+                            <h3 class="kart-item-name"> Male White Shirt </h3>
+                            <i class="fa-solid fa-xmark"></i>
+                            <div class = 'kart-item-amount-container'> 
+                                <span class = 'kart-item-sub'> - </span>     
+                                <span class = 'kart-item-amount'> 1 </span>     
+                                <span class = 'kart-item-add'> + </span>     
+                            </div>
+                            <p class="kart-item-price">R$ 140.00 </p>
+                        </div>
+                        <div class = 'kart-item-remove'> X </div>
+                    </li>
                 </ul>
             </div>
 

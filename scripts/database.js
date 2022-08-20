@@ -3,7 +3,7 @@ const products = [
         id: 1,
         name: 'Black Hat',
         image: './src/img/black-hat.png',
-        category: 'Acessórios',
+        category: 'Acessorios',
         description: 'Adicione um pouco de energia ao seu guarda roupa com essa vibrante peça de roupa.',
         price: 100
     },
